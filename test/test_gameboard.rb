@@ -2,6 +2,9 @@ gem 'minitest', '~> 5.2'
 require 'minitest/autorun'
 require 'minitest/pride'
 require './lib/gameboard'
+require 'simplecov'
+
+SimpleCov.start
 
 
 class GameboardTest < Minitest::Test
@@ -47,8 +50,75 @@ class GameboardTest < Minitest::Test
             "D1", "D2", "D3", "D4"]
 
     assert_instance_of Space, @new_gameboard.create_spaces(input)["A1"]
+
   end
 
+  def test_that_spaces_are_empty_when_game_starts
+
+    input =["A1", "A2", "A3", "A4",
+            "B1", "B2", "B3", "B4",
+            "C1", "C2", "C3", "C4",
+            "D1", "D2", "D3", "D4"]
+
+
+    assert @new_gameboard.create_spaces(input)["A1"].empty?
+
+
+  end
+
+  def test_that_spaces_is_filled_when_ship_is_assigned
+    skip
+    input =["A1", "A2", "A3", "A4",
+            "B1", "B2", "B3", "B4",
+            "C1", "C2", "C3", "C4",
+            "D1", "D2", "D3", "D4"]
+
+    #gamespaces = @new_gameboard.create_spaces(input)
+    @new_gameboard.place_ship("A1","A2")
+
+
+    refute @new_gameboard.create_spaces(input)["A1"].empty?
+  end
+
+  def test_that_evaluates_ship_placement_returns_true_if_horizantal
+
+    assert @new_gameboard.evaluates_ship_placement(2, "A1","A2")
+  end
+
+  def test_that_evaluates_ship_placement_returns_true_if_vertical
+
+    assert @new_gameboard.evaluates_ship_placement(2, "A1","B1")
+  end
+
+  def test_that_evaluates_ship_placement_returns_false_if_not_adjacent
+
+    refute @new_gameboard.evaluates_ship_placement(2, "A1","C1")
+  end
+
+  def test_that_evaluates_ship_placement_returns_false_if_it_wraps
+
+    refute @new_gameboard.evaluates_ship_placement(2, "D4","D1")
+  end
+
+  def test_that_evaluates_ship_placement_returns_true_if_horizantal
+
+    assert @new_gameboard.evaluates_ship_placement(3, "A1","A3")
+  end
+
+  def test_that_evaluates_ship_placement_returns_true_if_vertical
+
+    assert @new_gameboard.evaluates_ship_placement(3, "A1","C1")
+  end
+
+  def test_that_evaluates_ship_placement_returns_false_if_not_adjacent
+
+    refute @new_gameboard.evaluates_ship_placement(3, "A1","D1")
+  end
+
+  def test_that_evaluates_ship_placement_returns_false_if_it_wraps
+
+    refute @new_gameboard.evaluates_ship_placement(3, "D4","D2")
+  end
 
 
 
