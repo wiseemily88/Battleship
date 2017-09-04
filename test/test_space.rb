@@ -1,4 +1,4 @@
-em 'minitest', '~> 5.2'
+gem 'minitest', '~> 5.2'
 require 'minitest/autorun'
 require 'minitest/pride'
 require './lib/space'
@@ -18,35 +18,29 @@ class SpaceTest < Minitest::Test
     assert_equal "A2", space.coordinates
   end
 
-  def test_that_if_a_space_starts_as_empty
-
-    space = Space.new("A2")
-
-    assert space.empty?
-  end
 
   def test_that_if_a_ship_is_placed_the_space_is_not_empty
-    skip
     space = Space.new("A2")
+    space.ship_placed
 
     refute space.empty?
   end
 
   def test_that_if_a_space_is_attacked_and_space_is_empty_status_is_miss
-    skip
+
     space = Space.new("A2")
     space.attacked
 
-    assert_equal "miss", space.status
+    assert_equal "M", space.status
   end
 
   def test_that_if_a_space_is_attacked_and_space_is_not_empty_status_is_hit
-    skip
+
     space = Space.new("A2")
-    #ship_placed
+    space.ship_placed
     space.attacked
 
-    assert_equal "hit", space.status
+    assert_equal "H", space.status
   end
 
 end

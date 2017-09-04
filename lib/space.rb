@@ -1,9 +1,8 @@
-require 'pry'
 
 
 class Space
 
-attr_reader :coordinates
+attr_reader :coordinates,:status
 
   def initialize (coordinates)
     @coordinates = coordinates
@@ -20,7 +19,11 @@ attr_reader :coordinates
   end
 
   def attacked
-    #if content.empty? ==false, then attacked = h, if space is empty = m
+    if @empty == false
+      @status = "H"
+    else
+      @status = "M"
+    end
   end
 
 end
