@@ -17,14 +17,6 @@ class Ship
     @end_space = end_space
   end
 
-  def middle_space(length, start_space, end_space)
-    if length != 2 && start_space[0] == end_space[0]
-      middle_space = start_space.next
-    else length != 2 && start_space[1] == end_space[1]
-      middle_space = start_space[0].next + start_space[1]
-    end
-  end
-
   def hit
     @hit_count += 1
   end

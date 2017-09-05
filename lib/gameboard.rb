@@ -42,11 +42,25 @@ class Gameboard
     end.to_h
   end
 
-  def place_ship(start_space, end_space)
+  def middle_space(length, start_space, end_space)
+    if length != 2 && start_space[0] == end_space[0]
+      middle_space = start_space.next
+    else length != 2 && start_space[1] == end_space[1]
+      middle_space = start_space[0].next + start_space[1]
+    end
+  end
+
+  def place_ship(evaluates_ship_placement = true, length, start_space, end_space)
     gamespaces = create_spaces(["A1", "A2", "A3", "A4","B1", "B2", "B3", "B4","C1", "C2", "C3", "C4","D1", "D2", "D3", "D4"])
-    gamespaces[start_space].empty = false
-    gamespaces[end_space].empty = false
-    binding.pry
+      if length == 2
+        gamespaces[start_space].empty = false
+        gamespaces[end_space].empty = false
+      elsif length == 3
+        mid_space(length, start_space, end_space) #will take this out later
+        gamespaces[mid_space].empty = false
+        gamespaces[start_space].empty = false
+        gamespaces[end_space].empty = false
+      end  
   end
 
   def evaluates_ship_placement(length, start_space, end_space)
@@ -61,16 +75,16 @@ class Gameboard
         return true
       else
         return false
-      end  
+      end
     end
   end
 
 
 
 
-   #Ships cannot wrap around the board
+
   #   #Ships cannot overlap
-  #   #Ships can be laid either horizontally or vertically
+
   #   #Coordinates must correspond to the first and last units of the ship. (IE: You can’t place a two unit ship at “A1 A3”)
   # end
   #
