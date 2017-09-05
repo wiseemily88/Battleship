@@ -60,7 +60,7 @@ class Gameboard
         gamespaces[mid_space].empty = false
         gamespaces[start_space].empty = false
         gamespaces[end_space].empty = false
-      end  
+      end
   end
 
   def evaluates_ship_placement(length, start_space, end_space)
