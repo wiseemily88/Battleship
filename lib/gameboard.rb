@@ -1,5 +1,4 @@
 
-#require './lib/space'
 require 'pry'
 require './lib/space'
 
@@ -13,31 +12,28 @@ class Gameboard
 
     create_space_names = create_space_names(level)
     create_spaces(create_space_names)
+  end
 
+ def create_space_name_array(letters, numbers)
+   letters.map do |letter|
+     numbers.map do |number|
+      "#{letter}#{number}"
+     end
+   end.flatten
   end
 
   def create_space_names(level)
-    create_space_names = []
     if level == "Beginner"
-      ("A".."D").each do |letter|
-        (1..4).each do |number|
-          create_space_names << "#{letter}#{number}"
-        end
-      end
+      letters = ("A".."D")
+      numbers = (1..4)
     elsif level == "Intermediate"
-      ("A".."H").each do |letter|
-        (1..8).each do |number|
-          create_space_names << "#{letter}#{number}"
-        end
-      end
+      letters = ("A".."H")
+      numbers = (1..8)
     else
-      ("A".."L").each do |letter|
-        (1..12).each do |number|
-        create_space_names << "#{letter}#{number}"
-        end
-      end
+      letters = ("A".."L")
+      numbers = (1..12)
     end
-    create_space_names
+    create_space_name_array(letters, numbers)
   end
 
   def create_spaces(create_space_names)
@@ -46,25 +42,24 @@ class Gameboard
     end
   end
 
-  def middle_space(length, start_space, end_space)
-    if length != 2 && start_space[0] == end_space[0]
+  def middle_space(start_space, end_space)
+    if start_space[0] == end_space[0]
       middle_space = start_space.next
-    else length != 2 && start_space[1] == end_space[1]
+    else
       middle_space = start_space[0].next + start_space[1]
     end
   end
 
-  def place_ship(length, start_space, end_space)
-      if length == 2
-        @spaces[start_space].empty = false
-        @spaces[end_space].empty = false
+  def place_2_unit_ship(start_space, end_space)
+    @spaces[start_space].empty = false
+    @spaces[end_space].empty = false
+  end
 
-      elsif length == 3
-        mid_space = middle_space(length, start_space, end_space)
-        @spaces[mid_space].empty = false
-        @spaces[start_space].empty = false
-        @spaces[end_space].empty = false
-      end
+  def place_3_unit_ship(start_space, end_space)
+    mid_space = middle_space(start_space, end_space)
+    @spaces[mid_space].empty = false
+    @spaces[start_space].empty = false
+    @spaces[end_space].empty = false
   end
 
   def evaluates_ship_placement(length, start_space, end_space)
@@ -83,16 +78,4 @@ class Gameboard
     end
   end
 
-
-
-
-
-  #   #Ships cannot overlap
-
-  #   #Coordinates must correspond to the first and last units of the ship. (IE: You can’t place a two unit ship at “A1 A3”)
-  # end
-  #
-  # def renders_board
-  #   #this method will create the board based on the Gameboard
-  # end
 end

@@ -38,7 +38,7 @@ class GameboardTest < Minitest::Test
     assert_equal expected, @new_gameboard.create_space_names("Intermediate")
   end
 
-  def test_that_create_spaces_creates_game_hash
+  def test_that_create_spaces_creates_fills_spaces_hash
     input =["A1", "A2", "A3", "A4",
             "B1", "B2", "B3", "B4",
             "C1", "C2", "C3", "C4",
@@ -46,33 +46,32 @@ class GameboardTest < Minitest::Test
 
     @new_gameboard.create_spaces(input)
 
-
     assert_equal "A1", @new_gameboard.spaces["A1"].coordinates
-
   end
 
 
   def test_that_spaces_is_filled_when_a_2_unit_ship_is_assigned
-    @new_gameboard.place_ship(2, "A1","A2")
+    @new_gameboard.place_2_unit_ship("A1","A2")
 
     assert_equal false, @new_gameboard.spaces["A1"].empty
+    assert_equal false, @new_gameboard.spaces["A2"].empty
   end
 
   def test_that_middle_space_returns_the_middle_value
-    assert_equal "A2", @new_gameboard.middle_space(3, "A1","A3")
+    assert_equal "A2", @new_gameboard.middle_space("A1","A3")
   end
 
   def test_that_middle_space_returns_the_middle_value
-    assert_equal "B1", @new_gameboard.middle_space(3, "A1","C1")
+    assert_equal "B1", @new_gameboard.middle_space("A1","C1")
   end
 
   def test_that_spaces_is_filled_when_a_3_unit_ship_is_assigned
 
-    @new_gameboard.place_ship(3, "A1","A3")
+    @new_gameboard.place_3_unit_ship("A1","A3")
 
     assert_equal false, @new_gameboard.spaces["A1"].empty
     assert_equal false, @new_gameboard.spaces["A2"].empty
-    assert_equal false, @new_gameboard.spaces["A3"].empty  
+    assert_equal false, @new_gameboard.spaces["A3"].empty
   end
 
   def test_that_evaluates_ship_placement_returns_true_if_horizantal
