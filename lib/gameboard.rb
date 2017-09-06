@@ -42,24 +42,24 @@ class Gameboard
     end
   end
 
-  def middle_space(start_space, end_space)
-    if start_space[0] == end_space[0]
-      middle_space = start_space.next
-    else
-      middle_space = start_space[0].next + start_space[1]
-    end
+  # def middle_space(start_space, end_space)
+  #   if start_space[0] == end_space[0]
+  #     middle_space = start_space.next
+  #   else
+  #     middle_space = start_space[0].next + start_space[1]
+  #   end
+  # end
+
+  def place_2_unit_ship(start_space_2, end_space_2)
+    @spaces[start_space_2].empty = false
+    @spaces[end_space_2].empty = false
   end
 
-  def place_2_unit_ship(start_space, end_space)
-    @spaces[start_space].empty = false
-    @spaces[end_space].empty = false
-  end
-
-  def place_3_unit_ship(start_space, end_space)
-    mid_space = middle_space(start_space, end_space)
+  def place_3_unit_ship(start_space_3, end_space_3)
+    mid_space = middle_space(start_space_3, end_space_3)
     @spaces[mid_space].empty = false
-    @spaces[start_space].empty = false
-    @spaces[end_space].empty = false
+    @spaces[start_space_3].empty = false
+    @spaces[end_space_3].empty = false
   end
 
 

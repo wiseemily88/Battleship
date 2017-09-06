@@ -9,6 +9,18 @@ class Player
     assemble_the_fleet
   end
 
+  def place_2_unit_ship
+    start_space_2 = gets.chomp
+    end_space_2 = gets.chomp
+    confirm_ship_placement_for_2_unit(start_space_2, end_space_2)
+  end
+
+  def place_3_unit_ship
+    start_space_3 = gets.chomp
+    end_space_3 = gets.chomp
+    confirm_ship_placement_for_3_unit(start_space_3, end_space_3)
+  end
+
   def fire
     @shots_fired += 1
   end
@@ -21,18 +33,8 @@ class Player
     @fleet.length
   end
 
-  def assemble_the_fleet
-    @fleet = @ships.map { |length| Ship.new(length) }
-  end
 
-  def get_ship(type)
-    @fleet.find { |ship| ship.length == type }
-  end
 
-  def place_ship(board, ship, start_space, end_space)
-    ship.place(start_space, end_space)
-    board.set_spaces_occupied(start_space, end_space)
-  end
 
   def attack(board, coordinate)
     fire
