@@ -13,8 +13,6 @@ class GameboardTest < Minitest::Test
   end
 
   def test_that_gameboard_exits
-
-
     assert_instance_of  Gameboard, @new_gameboard
   end
 
@@ -29,8 +27,6 @@ class GameboardTest < Minitest::Test
   end
 
   def test_that_create_space_is_8_by_8_if_intermediate
-
-
     expected = ["A1", "A2", "A3", "A4", "A5", "A6", "A7", "A8",
                 "B1", "B2", "B3", "B4", "B5", "B6", "B7", "B8",
                 "C1", "C2", "C3", "C4", "C5", "C6", "C7", "C8",
@@ -43,41 +39,40 @@ class GameboardTest < Minitest::Test
   end
 
   def test_that_create_spaces_creates_game_hash
-
     input =["A1", "A2", "A3", "A4",
             "B1", "B2", "B3", "B4",
             "C1", "C2", "C3", "C4",
             "D1", "D2", "D3", "D4"]
 
-    assert_instance_of Space, @new_gameboard.create_spaces(input)["A1"]
+    @new_gameboard.create_spaces(input)
+
+
+    assert_equal "A1", @new_gameboard.spaces["A1"].coordinates
 
   end
 
-  def test_that_spaces_are_empty_when_game_starts
 
-    input =["A1", "A2", "A3", "A4",
-            "B1", "B2", "B3", "B4",
-            "C1", "C2", "C3", "C4",
-            "D1", "D2", "D3", "D4"]
+  def test_that_spaces_is_filled_when_a_2_unit_ship_is_assigned
+    @new_gameboard.place_ship(2, "A1","A2")
 
-
-    assert @new_gameboard.create_spaces(input)["A1"].empty?
-
-
+    assert_equal false, @new_gameboard.spaces["A1"].empty
   end
 
-  def test_that_spaces_is_filled_when_ship_is_assigned
-    skip
-    input =["A1", "A2", "A3", "A4",
-            "B1", "B2", "B3", "B4",
-            "C1", "C2", "C3", "C4",
-            "D1", "D2", "D3", "D4"]
+  def test_that_middle_space_returns_the_middle_value
+    assert_equal "A2", @new_gameboard.middle_space(3, "A1","A3")
+  end
 
-    #gamespaces = @new_gameboard.create_spaces(input)
-    @new_gameboard.place_ship("A1","A2")
+  def test_that_middle_space_returns_the_middle_value
+    assert_equal "B1", @new_gameboard.middle_space(3, "A1","C1")
+  end
 
+  def test_that_spaces_is_filled_when_a_3_unit_ship_is_assigned
 
-    refute @new_gameboard.create_spaces(input)["A1"].empty?
+    @new_gameboard.place_ship(3, "A1","A3")
+
+    assert_equal false, @new_gameboard.spaces["A1"].empty
+    assert_equal false, @new_gameboard.spaces["A2"].empty
+    assert_equal false, @new_gameboard.spaces["A3"].empty  
   end
 
   def test_that_evaluates_ship_placement_returns_true_if_horizantal

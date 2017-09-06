@@ -4,12 +4,16 @@ require 'pry'
 require './lib/space'
 
 class Gameboard
-  attr_accessor :level
+  attr_accessor :level, :spaces
 
   def initialize
     @spaces = {}
     @whose_board = "player1"
     @level = level #update you later!
+
+    create_space_names = create_space_names(level)
+    create_spaces(create_space_names)
+
   end
 
   def create_space_names(level)
@@ -38,8 +42,8 @@ class Gameboard
 
   def create_spaces(create_space_names)
     create_space_names.map do |name|
-      [name, Space.new(name)]
-    end.to_h
+      @spaces.merge!({name => Space.new(name)})
+    end
   end
 
   def middle_space(length, start_space, end_space)
@@ -50,16 +54,16 @@ class Gameboard
     end
   end
 
-  def place_ship(evaluates_ship_placement = true, length, start_space, end_space)
-    gamespaces = create_spaces(["A1", "A2", "A3", "A4","B1", "B2", "B3", "B4","C1", "C2", "C3", "C4","D1", "D2", "D3", "D4"])
+  def place_ship(length, start_space, end_space)
       if length == 2
-        gamespaces[start_space].empty = false
-        gamespaces[end_space].empty = false
+        @spaces[start_space].empty = false
+        @spaces[end_space].empty = false
+
       elsif length == 3
-        mid_space(length, start_space, end_space) #will take this out later
-        gamespaces[mid_space].empty = false
-        gamespaces[start_space].empty = false
-        gamespaces[end_space].empty = false
+        mid_space = middle_space(length, start_space, end_space)
+        @spaces[mid_space].empty = false
+        @spaces[start_space].empty = false
+        @spaces[end_space].empty = false
       end
   end
 
