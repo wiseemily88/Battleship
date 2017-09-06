@@ -62,20 +62,5 @@ class Gameboard
     @spaces[end_space].empty = false
   end
 
-  def evaluates_ship_placement(length, start_space, end_space)
-    if length == 2
-      if start_space.next == end_space || start_space[0].next == end_space[0] && start_space[1] == end_space[1]
-        return true
-      else
-        return false
-      end
-    elsif length == 3
-      if start_space.next.next == end_space || start_space[0].next.next == end_space[0] && start_space[1] == end_space[1]
-        return true
-      else
-        return false
-      end
-    end
-  end
 
 end

@@ -74,46 +74,5 @@ class GameboardTest < Minitest::Test
     assert_equal false, @new_gameboard.spaces["A3"].empty
   end
 
-  def test_that_evaluates_ship_placement_returns_true_if_horizantal
-
-    assert @new_gameboard.evaluates_ship_placement(2, "A1","A2")
-  end
-
-  def test_that_evaluates_ship_placement_returns_true_if_vertical
-
-    assert @new_gameboard.evaluates_ship_placement(2, "A1","B1")
-  end
-
-  def test_that_evaluates_ship_placement_returns_false_if_not_adjacent
-
-    refute @new_gameboard.evaluates_ship_placement(2, "A1","C1")
-  end
-
-  def test_that_evaluates_ship_placement_returns_false_if_it_wraps
-
-    refute @new_gameboard.evaluates_ship_placement(2, "D4","D1")
-  end
-
-  def test_that_evaluates_ship_placement_returns_true_if_horizantal
-
-    assert @new_gameboard.evaluates_ship_placement(3, "A1","A3")
-  end
-
-  def test_that_evaluates_ship_placement_returns_true_if_vertical
-
-    assert @new_gameboard.evaluates_ship_placement(3, "A1","C1")
-  end
-
-  def test_that_evaluates_ship_placement_returns_false_if_not_adjacent
-
-    refute @new_gameboard.evaluates_ship_placement(3, "A1","D1")
-  end
-
-  def test_that_evaluates_ship_placement_returns_false_if_it_wraps
-
-    refute @new_gameboard.evaluates_ship_placement(3, "D4","D2")
-  end
-
-
-
+  
 end
