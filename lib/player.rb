@@ -1,6 +1,6 @@
-require './lib/messages'
+
 require './lib/rules'
-require 'pry'
+
 class Player
 
 include Rules

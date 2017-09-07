@@ -1,5 +1,5 @@
 
-require 'pry'
+
 require './lib/space'
 require './lib/rules'
 
@@ -59,4 +59,5 @@ include Rules
     @spaces[end_space_3].empty = false
   end
 
+  #add print_board_method
 end
