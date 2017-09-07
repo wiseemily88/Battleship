@@ -72,29 +72,6 @@ class ComputerTest < Minitest::Test
     assert_includes (expected), computer.select_end_space(input, "D3")
   end
 
-
-  def test_select_2_unit_ship
-    skip
-    computer = Computer.new
-    expected = ["A1", "A2", "A3", "A4",
-                "B1", "B2", "B3", "B4",
-                "C1", "C2", "C3", "C4",
-                "D1", "D2", "D3", "D4"]
-
-    assert "I made it", computer.select_2_unit_ship
-  end
-
-  def test_select_3_unit_ship
-    skip
-    computer = Computer.new
-    expected = ["A1", "A2", "A3", "A4",
-                "B1", "B2", "B3", "B4",
-                "C1", "C2", "C3", "C4",
-                "D1", "D2", "D3", "D4"]
-
-    assert "I made it", computer.select_3_unit_ship
-  end
-
   def test_removes_coordinates_for_ship_2
 
     computer = Computer.new
@@ -111,6 +88,16 @@ class ComputerTest < Minitest::Test
   refute_includes (expected), computer.remove_coordinates_for_ship_2(create_space_names,"B1", "D3")
   end
 
+  def test_coordinates_for_ships
+
+    computer = Computer.new
+    expected = ["A1", "A2", "A3", "A4",
+                "B1", "B2", "B3", "B4",
+                "C1", "C2", "C3", "C4",
+                "D1", "D2", "D3", "D4"]
+
+    assert "I made it", computer.select_coordinates_for_ships
+  end
 
 
 end
