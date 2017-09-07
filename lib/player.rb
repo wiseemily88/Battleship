@@ -1,12 +1,9 @@
 
 class Player
 
-  def initialize(ship_types)
+  def initialize
     @shots_fired = 0
     @known_spaces = []
-    @ships = ship_types
-    @fleet = []
-    assemble_the_fleet
   end
 
   def place_2_unit_ship
@@ -24,16 +21,6 @@ class Player
   def fire
     @shots_fired += 1
   end
-
-  def uncover(coordinates)
-    @known_spaces << coordinates
-  end
-
-  def ship_count
-    @fleet.length
-  end
-
-
 
 
   def attack(board, coordinate)

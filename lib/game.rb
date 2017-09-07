@@ -1,9 +1,9 @@
 
-
+# don't have methods - but create instance of the object and then create methods
   def game_set_up
 
   end
-  def computer_ship_placement
+
    select_2_unit_ship
    select_3_unit_ship
 

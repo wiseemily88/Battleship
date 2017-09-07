@@ -1,11 +1,18 @@
+require 'pry'
 module Rules
 
+  def confirm_ship_placement_for_2_unit(create_space_names, start_space, end_space)
+    unless evaluates_ship_placement( start_space, end_space)
+      select_end_space(create_space_names, start_space)
+    end
+      end_space_2 = select_end_space(create_space_names, start_space)
+  end
 
-  def confirm_ship_placement_for_2_unit(start_space, end_space)
-    loop do
-      end_space_2 = select_end_space_2_unit(start_space)
-      break end_space_2 unless evaluates_ship_placement( start_space, end_space)
+  def confirm_ship_placement_for_3_unit(create_space_names, start_space, end_space)
+    unless evaluates_ship_placement_unit_3(start_space, end_space)
+      select_end_space(create_space_names, start_space)
      end
+     end_space_3 = select_end_space(create_space_names, start_space)
   end
 
   def same_row?(start_space, end_space)
@@ -27,8 +34,7 @@ module Rules
   end
 
   def evaluates_ship_placement(start_space, end_space)
-    if
-      (same_row?(start_space, end_space) && adjacent_row?(start_space, end_space)) ||
+    if (same_row?(start_space, end_space) && adjacent_row?(start_space, end_space)) ||
       (same_column?(start_space, end_space) && adjacent_column?(start_space, end_space))
       return true
     else
@@ -47,20 +53,12 @@ module Rules
   end
 
   def evaluates_ship_placement_unit_3(start_space, end_space)
-    if
-      (unit3_row?(start_space, end_space) && same_row?(start_space, end_space)) ||
+    if(unit3_row?(start_space, end_space) && same_row?(start_space, end_space)) ||
       (unit3_column?(start_space, end_space) && same_column?(start_space, end_space))
       return true
     else
       return false
     end
-  end
-
-  def confirm_ship_placement_for_3_unit(start_space, end_space)
-    loop do
-      end_space_3 = select_end_space(start_space)
-      break end_space_3 unless evaluates_ship_placement_unit_3(start_space, end_space)
-     end
   end
 
   def middle_space(start_space, end_space)
@@ -72,10 +70,10 @@ module Rules
   end
 
   def validate_ships_dont_overlap(start_space, end_space, middle_space)
-    loop do
-      end_space_3 = select_end_space(start_space)
-      break end_space_3 unless end_space_3 == start_space|| end_space_3 == end_space || end_space_3 == middle_space
+    unless end_space == start_space|| end_space_3 == end_space || end_space_3 == middle_space
+      select_end_space(start_space)
     end
+    end_space_3 = select_end_space(start_space)
   end
 
   def remove_coordinates_for_ship_2(start_space, end_space)
@@ -84,3 +82,4 @@ module Rules
     create_space_names.delete_if{|coordinate| coordinate == start_space ||
     coordinate == end_space}
   end
+end

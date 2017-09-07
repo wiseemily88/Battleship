@@ -1,14 +1,23 @@
 require 'pry'
 require './lib/gameboard'
+require './lib/rules'
+
 
 class Computer
+
+include Rules
 
   def select_2_unit_ship
     board = Gameboard.new
     create_space_names = board.create_space_names("Beginner")
     start_space_2 = select_start_space(create_space_names)
     end_space_2 = select_end_space(create_space_names, start_space_2)
-    confirm_ship_placement_for_2_unit(start_space_2, end_space_2)
+    confirm_ship_placement_for_2_unit(create_space_names, start_space_2, end_space_2)
+    create_space_names = remove_coordinates_for_ship_2(start_space_2, end_space_2)
+    start_space_3 = select_start_space(create_space_names)
+    end_space_3 = validate_ships_dont_overlap(start_space_2, end_space_2, middle_space)
+    confirm_ship_placement_for_3_unit(start_space_3, end_space_3)
+    puts "I made it"
   end
 
   def select_start_space(create_space_names)
@@ -25,8 +34,10 @@ class Computer
     start_space_3 = select_start_space(create_space_names)
     end_space_3 = validate_ships_dont_overlap(start_space_2, end_space_2, middle_space)
     confirm_ship_placement_for_3_unit(start_space_3, end_space_3)
-
+  puts "I made it"
   end
+
+end
 
   # def confirm_ship_placement_for_2_unit(start_space, end_space)
   #   loop do
@@ -114,7 +125,6 @@ class Computer
   #   end
   # end
 
-end
 
 
 
