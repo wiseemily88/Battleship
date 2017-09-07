@@ -100,4 +100,20 @@ class ComputerTest < Minitest::Test
 
   refute_includes (expected), computer.remove_coordinates_for_ship_2("B1", "D3")
   end
+
+  def test_select_end_space_returns_accurate_value_for_middle_edge
+
+    computer = Computer.new
+    input = "D2"
+    expected = ["D1", "D3", "C2"]
+
+    assert_includes (expected), computer.select_end_space_2_unit(input)
+  end
+
+  def remove_coordinates_for_ship_2(start_space, end_space)
+    board = Gameboard.new
+    create_space_names = board.create_space_names("Beginner")
+    create_space_names.delete_if{|coordinate| coordinate == start_space ||
+    coordinate == end_space}
+  end
 end

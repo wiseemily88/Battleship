@@ -5,14 +5,15 @@ module Rules
     unless evaluates_ship_placement( start_space, end_space)
       select_end_space(create_space_names, start_space)
     end
-      end_space_2 = select_end_space(create_space_names, start_space)
+    end_space_2 = select_end_space(create_space_names, start_space)
+    binding.pry
   end
 
   def confirm_ship_placement_for_3_unit(create_space_names, start_space, end_space)
     unless evaluates_ship_placement_unit_3(start_space, end_space)
       select_end_space(create_space_names, start_space)
-     end
-     end_space_3 = select_end_space(create_space_names, start_space)
+    end
+    end_space_3 = select_end_space(create_space_names, start_space)
   end
 
   def same_row?(start_space, end_space)
@@ -69,17 +70,11 @@ module Rules
     end
   end
 
-  def validate_ships_dont_overlap(start_space, end_space, middle_space)
-    unless end_space == start_space|| end_space_3 == end_space || end_space_3 == middle_space
+  def validate_ships_dont_overlap(end_space_3, start_space, end_space, middle_space)
+    unless end_space_3 == start_space_2|| end_space_3 == end_space || end_space_3 == middle_space
       select_end_space(start_space)
     end
     end_space_3 = select_end_space(start_space)
   end
 
-  def remove_coordinates_for_ship_2(start_space, end_space)
-    board = Gameboard.new
-    create_space_names = board.create_space_names("Beginner")
-    create_space_names.delete_if{|coordinate| coordinate == start_space ||
-    coordinate == end_space}
-  end
 end
