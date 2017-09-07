@@ -1,4 +1,3 @@
-#Welcome to BATTLESHIP
 
 class Greeter
 

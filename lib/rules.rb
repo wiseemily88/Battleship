@@ -1,4 +1,4 @@
-require 'pry'
+
 module Rules
 
   def confirm_ship_placement_for_2_unit(create_space_names, start_space, end_space)

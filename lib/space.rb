@@ -1,5 +1,4 @@
 
-
 class Space
 attr_accessor :empty
 attr_reader :coordinates,:status
