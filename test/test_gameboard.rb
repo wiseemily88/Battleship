@@ -57,13 +57,7 @@ class GameboardTest < Minitest::Test
     assert_equal false, @new_gameboard.spaces["A2"].empty
   end
 
-  def test_that_middle_space_returns_the_middle_value
-    assert_equal "A2", @new_gameboard.middle_space("A1","A3")
-  end
 
-  def test_that_middle_space_returns_the_middle_value
-    assert_equal "B1", @new_gameboard.middle_space("A1","C1")
-  end
 
   def test_that_spaces_is_filled_when_a_3_unit_ship_is_assigned
 
@@ -74,5 +68,5 @@ class GameboardTest < Minitest::Test
     assert_equal false, @new_gameboard.spaces["A3"].empty
   end
 
-  
+
 end

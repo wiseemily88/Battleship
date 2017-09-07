@@ -6,11 +6,10 @@ module Rules
       select_end_space(create_space_names, start_space)
     end
     end_space_2 = select_end_space(create_space_names, start_space)
-    binding.pry
   end
 
   def confirm_ship_placement_for_3_unit(create_space_names, start_space, end_space)
-    unless evaluates_ship_placement_unit_3(start_space, end_space)
+    unless evaluate_ship_placement_and_overlap(start_space, end_space, middle_space)
       select_end_space(create_space_names, start_space)
     end
     end_space_3 = select_end_space(create_space_names, start_space)
@@ -70,11 +69,17 @@ module Rules
     end
   end
 
-  def validate_ships_dont_overlap(end_space_3, start_space, end_space, middle_space)
-    unless end_space_3 == start_space_2|| end_space_3 == end_space || end_space_3 == middle_space
-      select_end_space(start_space)
+  def validate_ships_dont_overlap(start_space, end_space, middle_space)
+    if end_space == start_space||  end_space == middle_space
+      return false
+    else
+      return true
     end
-    end_space_3 = select_end_space(start_space)
+  end
+
+  def evaluate_ship_placement_and_overlap(start_space, end_space, middle_space)
+  true  if validate_ships_dont_overlap(start_space, end_space, middle_space) &&
+          evaluates_ship_placement_unit_3(start_space, end_space)
   end
 
 end

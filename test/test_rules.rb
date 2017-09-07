@@ -82,6 +82,12 @@ class RulesTest < Minitest::Test
     assert computer.evaluates_ship_placement_unit_3("B1", "D1")
   end
 
+  def test_evaulates_ship_placement_and_overlap_is_valie
+    computer = Computer.new
+
+    assert computer.evaluate_ship_placement_and_overlap("B1", "D1", "C1")
+  end
+
   def test_that_middle_space_returns_the_middle_value
     computer = Computer.new
 
@@ -95,24 +101,24 @@ class RulesTest < Minitest::Test
   end
 
 
-  def validate_ships_dont_overlap_returns_assigns_end_space_if_valid
+  def test_validate_ships_dont_overlap_returns_assigns_end_space_if_valid
     computer = Computer.new
-    end_space_3 = "A1"
+
     start_space = "D2"
     middle_space = "D3"
-    end_space = "D4"
+    end_space = "D2"
 
-    assert_equal "A1" , computer.validate_ships_dont_overlap(end_space_3, start_space, end_space, middle_space)
+    refute computer.validate_ships_dont_overlap(start_space, end_space, middle_space)
   end
 
-  def validate_ships_dont_overlap_refutes_if_space_is_invalid
+  def test_validate_ships_dont_overlap_refutes_if_space_is_invalid
     computer = Computer.new
-    end_space_3 = "A1"
+
     start_space = "A1"
     middle_space = "B1"
-    end_space = "C1"
+    end_space = "C4"
 
-    refute_equal "A1" , computer.validate_ships_dont_overlap(end_space_3, start_space, end_space, middle_space)
+    assert computer.validate_ships_dont_overlap(start_space, end_space, middle_space)
   end
 
   def test_confirm_ship_placement_for_2_unit_returns_valid_end_space

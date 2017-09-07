@@ -13,7 +13,7 @@ include Rules
     start_space_2 = select_start_space(create_space_names)
     end_space_2 = select_end_space(create_space_names, start_space_2)
     confirm_ship_placement_for_2_unit(create_space_names, start_space_2, end_space_2)
-    create_space_names = remove_coordinates_for_ship_2(start_space_2, end_space_2)
+    create_space_names = remove_coordinates_for_ship_2(create_space_names, start_space_2, end_space_2)
     start_space_3 = select_start_space(create_space_names)
     end_space_3 = validate_ships_dont_overlap(start_space_2, end_space_2, middle_space)
     confirm_ship_placement_for_3_unit(start_space_3, end_space_3)
@@ -27,6 +27,13 @@ include Rules
   def select_end_space(create_space_names, start_space)
     create_space_names.delete_if{|coordinate| coordinate == start_space}.sample
   end
+
+  def remove_coordinates_for_ship_2(create_space_names, start_space, end_space)
+    create_space_names.delete_if{|coordinate| coordinate == start_space ||
+    coordinate == end_space}
+  end
+
+
 
   def select_3_unit_ship
     board = Gameboard.new
@@ -76,12 +83,7 @@ end
 
 
 
-  # def remove_coordinates_for_ship_2(start_space, end_space)
-  #   board = Gameboard.new
-  #   create_space_names = board.create_space_names("Beginner")
-  #   create_space_names.delete_if{|coordinate| coordinate == start_space ||
-  #   coordinate == end_space}
-  # end
+
   #
   # def unit3_row?(start_space, end_space)
   #   true if start_space[1].next.next == end_space[1] ||
