@@ -44,14 +44,3 @@ class Game
   end
 
   #def main_game_phase- this would be the REPL that loops through the shot sequence
-
-
-
-
-  end
-
-   select_2_unit_ship
-   select_3_unit_ship
-
-   puts message.game_set_up_message
-  end
